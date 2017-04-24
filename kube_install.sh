@@ -6,7 +6,7 @@ ROLE="controller"
 
 # Master and Minions IP / DNS
 MASTER_IP="172.31.112.215"
-MINIONS_IP=('172.31.121.60')
+declare -a MINIONS_IP=('172.31.121.60');
 MASTER_DNS="centos-master"
 MINIONS_DNS="centos-minion"
 
@@ -40,7 +40,6 @@ echo "- Installing Kube and Docker"
 yum install -y --enablerepo=$RELEASE kubernetes docker &> /dev/null
 
 echo "- Configuring etc/hosts"
-declare -a $MINIONS_IP;
 sed -i '/$MASTER_DNS/d' /etc/hosts
 sed -i '/$MINIONS_DNS/d' /etc/hosts
 echo $MASTER_IP $MASTER_DNS >> /etc/hosts
