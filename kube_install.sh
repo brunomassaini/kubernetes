@@ -42,9 +42,9 @@ sudo yum install -y --enablerepo=$RELEASE kubernetes docker &> /dev/null
 echo "- Configuring etc/hosts"
 sudo sed -i '/$MASTER_DNS/d' /etc/hosts
 sudo sed -i '/$MINIONS_DNS/d' /etc/hosts
-echo $MASTER_IP $MASTER_DNS >> /etc/hosts
+sudo echo $MASTER_IP $MASTER_DNS >> /etc/hosts
 for i in ${!MINIONS_IP[@]} ; do
-  echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
+  sudo echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
 done
 
 if [ $ROLE = "controller" ]; then
@@ -52,7 +52,7 @@ if [ $ROLE = "controller" ]; then
 
   echo "- Kubernetes/config"
   sudo sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://'"${MASTER_DNS}"':8080"' /etc/kubernetes/config
-  echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://'"${MASTER_DNS}"':2379"' >> /etc/kubernetes/config
+  sudo echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://'"${MASTER_DNS}"':2379"' >> /etc/kubernetes/config
   
   echo "- Kubernetes/apiserver"
   sudo sed -i '/KUBE_API_ADDRESS/c\KUBE_API_ADDRESS="--address=0.0.0.0"' /etc/kubernetes/apiserver
