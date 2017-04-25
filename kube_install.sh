@@ -30,10 +30,10 @@ echo "- Configuring Repo"
 if [ -f $REPO_FILE ]; then
    > $REPO_FILE
 fi
-echo $REPO >> $REPO_FILE
-echo name=$RELEASE >> $REPO_FILE
-echo baseurl=$BASEURL >> $REPO_FILE
-echo gpgcheck=$GPGCHECK >> $REPO_FILE
+sudo echo $REPO >> $REPO_FILE
+sudo echo name=$RELEASE >> $REPO_FILE
+sudo echo baseurl=$BASEURL >> $REPO_FILE
+sudo echo gpgcheck=$GPGCHECK >> $REPO_FILE
 sudo yum update &> /dev/null
 
 echo "- Installing Kube and Docker"
