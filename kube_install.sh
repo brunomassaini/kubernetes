@@ -120,7 +120,7 @@ if [ $ROLE = "controller" ]; then
 
       echo "-- Kubernetes/kubelet"
       sed -i '/KUBELET_ADDRESS/c\KUBELET_ADDRESS="--address=0.0.0.0"' /etc/kubernetes/kubelet
-      sed -i '/KUBELET_PORT/c\KUBELET_PORT="--kubelet-port=10250"' /etc/kubernetes/kubelet
+      sed -i '/KUBELET_PORT/c\KUBELET_PORT="--port=10250"' /etc/kubernetes/kubelet
       sed -i '/KUBELET_HOSTNAME/c\KUBELET_HOSTNAME="--hostname-override='"${MINIONS_DNS}"'`expr $i + 1`"' /etc/kubernetes/kubelet
       sed -i '/KUBELET_API_SERVER/c\KUBELET_API_SERVER="--api-server='"${MASTER_DNS}"':8080"' /etc/kubernetes/kubelet
       sed -i '/KUBELET_POD_INFRA_CONTAINER/d' /etc/kubernetes/kubelet
