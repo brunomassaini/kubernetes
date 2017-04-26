@@ -26,6 +26,7 @@ Configuring CONTROLLER Role
 -- Configuring Repo
 -- Installing Kube and Docker
 -- Configuring etc/hosts
+- Controller Specifics
 -- Kubernetes/config
 -- Kubernetes/apiserver
 -- Installing and Configuring ETCD
@@ -38,6 +39,7 @@ Configuring MINION Role
 -- Configuring Repo
 -- Installing Kube and Docker
 -- Configuring etc/hosts
+- Minion Specifics
 -- Kubernetes/config
 -- Kubernetes/kubelet
 -- * Starting Services *

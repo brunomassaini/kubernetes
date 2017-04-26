@@ -59,6 +59,7 @@ done
 
 if [ $CONTROLLER = "true" ]; then
 
+  echo "- Controller Specifics"
   echo "-- Kubernetes/config"
   sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://'"${MASTER_DNS}"':8080"' /etc/kubernetes/config
   echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://'"${MASTER_DNS}"':2379"' >> /etc/kubernetes/config
@@ -114,6 +115,7 @@ if [ $CONTROLLER = "true" ]; then
         echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
       done
 
+      echo "- Minion Specifics"
       echo "-- Kubernetes/config"
       sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://'"${MASTER_DNS}"':8080"' /etc/kubernetes/config
       echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://'"${MASTER_DNS}"':2379"' >> /etc/kubernetes/config
