@@ -6,7 +6,7 @@ SSHUSER="user"
 
 # Specify Server Role
 # controller or minion
-ROLE="controller"
+CONTROLLER="true"
 
 # Master and Minions IP / DNS
 MASTER_IP="172.31.112.215"
@@ -22,7 +22,7 @@ BASEURL="http://cbs.centos.org/repos/"$RELEASE"/x86_64/os/"
 GPGCHECK="0"
 
 # Installation
-if [ $ROLE = "controller" ]; then
+if [ $CONTROLLER = "true" ]; then
   echo "Configuring CONTROLLER Role"
 else
   echo "Configuring MINION Role"
@@ -57,7 +57,7 @@ for i in ${!MINIONS_IP[@]} ; do
   echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
 done
 
-if [ $ROLE = "controller" ]; then
+if [ $CONTROLLER = "true" ]; then
 
   echo "-- Kubernetes/config"
   sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://'"${MASTER_DNS}"':8080"' /etc/kubernetes/config
@@ -134,10 +134,6 @@ EOF
 
   done
 
-fi
-
-if [ $ROLE = "minion" ]; then
-  echo "Configuring MINION Role"
 fi
 
 echo "OK - Kubernetes Setup Finished"
