@@ -4,11 +4,16 @@ Simple script to install and configure Kubernetes Cluster Basics
 
 ## Configuration
 
-If you are running on the controller/master you just need to specify the IP of the controller and the IP array of the nodes
+If you are running on the controller/master you just need to specify the IP of the controller and the IP array of the nodes on a `config.json` file
 
-```bash
-MASTER_IP="172.31.112.215"
-declare -a MINIONS_IP=('172.31.121.60');
+```json
+{
+	"MASTER_IP": "172.16.0.1",
+    "MINIONS_IP": [
+        "172.16.0.2",
+        "172.16.0.3"
+    ]
+}
 ```
 
 ## Running
