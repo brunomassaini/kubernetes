@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Prerequisites for running the script
+echo "Loading Config"
+  {
+    yum install jq
+    source config.json
+  } &> /dev/null
+MASTER_IP=`jq -r '.MASTER_IP' config.json`
+MINIONS_IP="("`jq -r '.MINIONS_IP' config.json | sed "s/\"/'/g" | sed 's/\,//g' | sed 's/\[//g' | sed 's/\]//g'`")"
+
 # SSH info
 SSHKEY="/home/user/.ssh/id_rsa"
 SSHUSER="user"
@@ -8,9 +17,8 @@ SSHUSER="user"
 # controller or minion
 CONTROLLER="true"
 
-# Master and Minions IP / DNS
-MASTER_IP="172.31.112.215"
-declare -a MINIONS_IP=('172.31.121.60');
+# Master and Minions DNS
+declare -a MINIONS_IP_ARRAY=$MINIONS_IP;
 MASTER_DNS="centos-master"
 MINIONS_DNS="centos-minion"
 
@@ -53,8 +61,8 @@ echo "-- Configuring etc/hosts"
 sed -i '/$MASTER_DNS/d' /etc/hosts
 sed -i '/$MINIONS_DNS/d' /etc/hosts
 echo $MASTER_IP $MASTER_DNS >> /etc/hosts
-for i in ${!MINIONS_IP[@]} ; do
-  echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
+for i in ${!MINIONS_IP_ARRAY[@]} ; do
+  echo ${MINIONS_IP_ARRAY[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
 done
 
 if [ $CONTROLLER = "true" ]; then
@@ -80,7 +88,7 @@ if [ $CONTROLLER = "true" ]; then
   echo "-- *" `systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep "(running)" | wc -l` "Services Started *"
 
   echo "Configuring MINION Role"
-  for i in ${!MINIONS_IP[@]} ; do
+  for i in ${!MINIONS_IP_ARRAY[@]} ; do
     echo "- Minion" `expr $i + 1`
 
     ssh -T -i $SSHKEY $SSHUSER@$MINIONS_DNS`expr $i + 1` << EOF
@@ -111,8 +119,8 @@ if [ $CONTROLLER = "true" ]; then
       sed -i '/$MASTER_DNS/d' /etc/hosts
       sed -i '/$MINIONS_DNS/d' /etc/hosts
       echo $MASTER_IP $MASTER_DNS >> /etc/hosts
-      for i in ${!MINIONS_IP[@]} ; do
-        echo ${MINIONS_IP[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
+      for i in ${!MINIONS_IP_ARRAY[@]} ; do
+        echo ${MINIONS_IP_ARRAY[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
       done
 
       echo "- Minion Specifics"
