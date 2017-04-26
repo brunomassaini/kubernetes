@@ -73,10 +73,10 @@ if [ $ROLE = "controller" ]; then
   sed -i '/ETCD_LISTEN_CLIENT_URLS/c\ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"' /etc/etcd/etcd.conf
   sed -i '/ETCD_ADVERTISE_CLIENT_URLS/c\ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379"' /etc/etcd/etcd.conf
 
-  echo "* Starting 4 Services *"
+  echo "-- * Starting 4 Services *"
   systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler &> /dev/null
   systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler
-  echo "*" `systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep "(running)" | wc -l` "Services Started *"
+  echo "-- *" `systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep "(running)" | wc -l` "Services Started *"
 
   echo "Configuring MINION Role"
   for i in ${!MINIONS_IP[@]} ; do
@@ -125,10 +125,9 @@ if [ $ROLE = "controller" ]; then
       sed -i '/KUBELET_API_SERVER/c\KUBELET_API_SERVER="--api-servers='"${MASTER_DNS}"':8080"' /etc/kubernetes/kubelet
       sed -i '/KUBELET_POD_INFRA_CONTAINER/d' /etc/kubernetes/kubelet
 
-      echo "* Starting 3 Services *"
+      echo "-- * Starting Services *"
       systemctl enable kube-proxy kubelet docker &> /dev/null
       systemctl start kube-proxy kubelet docker &> /dev/null
-      echo "*" `systemctl status kube-proxy kubelet docker | grep "(running)" | wc -l` "Services Started *"
 
       exit
 EOF
