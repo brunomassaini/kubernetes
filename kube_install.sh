@@ -3,7 +3,7 @@
 # Prerequisites for running the script
 echo "Loading Config"
   {
-    yum install jq
+    yum install -y jq
     source config.json
   } &> /dev/null
 MASTER_IP=`jq -r '.MASTER_IP' config.json`
