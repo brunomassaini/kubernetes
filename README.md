@@ -18,7 +18,7 @@ If you are running on the controller/master you just need to specify the IP of t
 
 ```json
 {
-	"MASTER_IP": "172.16.0.1",
+    "MASTER_IP": "172.16.0.1",
     "MINIONS_IP": [
         "172.16.0.2",
         "172.16.0.3"
