@@ -2,6 +2,16 @@
 
 Simple script to install and configure Kubernetes Cluster Basics
 
+## Prerequisites
+
+You should have `ssh` access to all servers and also be able to sudo without asking for password.
+
+To export the key of the controller server to all servers just run:
+```bash
+ssh-copy-id IP_OF_NODE1
+ssh-copy-id IP_OF_NODE2
+```
+
 ## Configuration
 
 If you are running on the controller/master you just need to specify the IP of the controller and the IP array of the nodes on a `config.json` file
@@ -26,6 +36,8 @@ Just run the script on the controller or one of the nodes
 
 # Output should be similar to this
 Loading Config
+- MASTER IP: 172.31.112.215
+- MINIONS IP: ( '172.31.121.60' '172.31.104.192')
 Configuring CONTROLLER Role
 - Common Packages and Dependencies
 -- Installing and configuring NTP
@@ -38,6 +50,7 @@ Configuring CONTROLLER Role
 -- Installing and Configuring ETCD
 -- * Starting 4 Services *
 -- * 4 Services Started *
+----------
 Configuring MINION Role
 - Minion 1
 - Common Packages and Dependencies
@@ -49,6 +62,7 @@ Configuring MINION Role
 -- Kubernetes/config
 -- Kubernetes/kubelet
 -- * Starting Services *
+----------
 - Minion 2
 - Common Packages and Dependencies
 -- Installing and configuring NTP
@@ -59,5 +73,6 @@ Configuring MINION Role
 -- Kubernetes/config
 -- Kubernetes/kubelet
 -- * Starting Services *
+----------
 OK - Kubernetes Setup Finished
 ```
