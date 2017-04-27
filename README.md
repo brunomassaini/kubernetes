@@ -32,7 +32,7 @@ Just run the script on the controller or one of the nodes
 
 ```bash
 # Run the script
-./kube_install.sh
+sudo ./kube_install.sh
 
 # Output should be similar to this
 Loading Config
