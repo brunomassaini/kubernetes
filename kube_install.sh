@@ -60,8 +60,8 @@ echo "-- Installing Kube and Docker"
 yum install -y --enablerepo=$RELEASE kubernetes docker &> /dev/null
 
 echo "-- Configuring etc/hosts"
-sed -i '/$MASTER_DNS/d' /etc/hosts
-sed -i '/$MINIONS_DNS/d' /etc/hosts
+sed -i "/$MASTER_DNS/d" /etc/hosts
+sed -i "/$MINIONS_DNS/d" /etc/hosts
 echo $MASTER_IP $MASTER_DNS >> /etc/hosts
 for i in ${!MINIONS_IP_ARRAY[@]} ; do
   echo ${MINIONS_IP_ARRAY[$i]} $MINIONS_DNS`expr $i + 1` >> /etc/hosts
@@ -88,6 +88,7 @@ if [ $CONTROLLER = "true" ]; then
   systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler &> /dev/null
   systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler
   echo "-- *" `systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep "(running)" | wc -l` "Services Started *"
+  echo "----------"
 
   echo "Configuring MINION Role"
   for i in ${!MINIONS_IP_ARRAY[@]} ; do
@@ -140,6 +141,7 @@ if [ $CONTROLLER = "true" ]; then
       echo "-- * Starting Services *"
       systemctl enable kube-proxy kubelet docker &> /dev/null
       systemctl start kube-proxy kubelet docker &> /dev/null
+      echo "----------"
 
       exit
 EOF
