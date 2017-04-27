@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Prerequisites for running the script
+sudo su
 echo "Loading Config"
   {
     yum install -y jq
@@ -151,3 +152,4 @@ EOF
 fi
 
 echo "OK - Kubernetes Setup Finished"
+exit
