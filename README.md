@@ -36,8 +36,8 @@ Just run the script on the controller or one of the nodes
 
 # Output should be similar to this
 Loading Config
-- MASTER IP: 172.31.112.215
-- MINIONS IP: ( '172.31.121.60' '172.31.104.192')
+- MASTER IP: 172.16.0.1
+- MINIONS IP: ( '172.16.0.2' '172.16.0.3')
 Configuring CONTROLLER Role
 - Common Packages and Dependencies
 -- Installing and configuring NTP
