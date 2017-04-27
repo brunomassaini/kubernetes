@@ -38,6 +38,7 @@ sudo ./kube_install.sh
 Loading Config
 - MASTER IP: 172.16.0.1
 - MINIONS IP: ( '172.16.0.2' '172.16.0.3')
+----------
 Configuring CONTROLLER Role
 - Common Packages and Dependencies
 -- Installing and configuring NTP
