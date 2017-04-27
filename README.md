@@ -25,6 +25,7 @@ Just run the script on the controller or one of the nodes
 ./kube_install.sh
 
 # Output should be similar to this
+Loading Config
 Configuring CONTROLLER Role
 - Common Packages and Dependencies
 -- Installing and configuring NTP
@@ -39,6 +40,16 @@ Configuring CONTROLLER Role
 -- * 4 Services Started *
 Configuring MINION Role
 - Minion 1
+- Common Packages and Dependencies
+-- Installing and configuring NTP
+-- Configuring Repo
+-- Installing Kube and Docker
+-- Configuring etc/hosts
+- Minion Specifics
+-- Kubernetes/config
+-- Kubernetes/kubelet
+-- * Starting Services *
+- Minion 2
 - Common Packages and Dependencies
 -- Installing and configuring NTP
 -- Configuring Repo

@@ -8,6 +8,8 @@ echo "Loading Config"
   } &> /dev/null
 MASTER_IP=`jq -r '.MASTER_IP' config.json`
 MINIONS_IP="("`jq -r '.MINIONS_IP' config.json | sed "s/\"/'/g" | sed 's/\,//g' | sed 's/\[//g' | sed 's/\]//g'`")"
+echo "- MASTER IP:" $MASTER_IP
+echo "- MINIONS IP:" $MINIONS_IP
 
 # SSH info
 SSHKEY="/home/user/.ssh/id_rsa"
