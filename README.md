@@ -14,10 +14,12 @@ ssh-copy-id IP_OF_NODE2
 
 ## Configuration
 
-If you are running on the controller/master you just need to specify the IP of the controller and the IP array of the nodes on a `config.json` file
+If you are running on the controller/master you need to specify the **IP of the controller**, the **IP array of the nodes** and the **user** with the **key path** in order to ssh. All of this on the `config.json` file
 
 ```json
 {
+    "SSH_USER": "user",
+    "SSH_KEY": "/home/user/.ssh/id_rsa",
     "MASTER_IP": "172.16.0.1",
     "MINIONS_IP": [
         "172.16.0.2",
