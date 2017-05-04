@@ -1,4 +1,6 @@
 {
+    "SSH_USER": "user",
+    "SSH_KEY": "/home/user/.ssh/id_rsa",
     "MASTER_IP": "172.16.0.1",
     "MINIONS_IP": [
         "172.16.0.2",

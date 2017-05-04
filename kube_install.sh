@@ -13,8 +13,8 @@ echo "- MINIONS IP:" $MINIONS_IP
 echo "----------"
 
 # SSH info
-SSHKEY="/home/user/.ssh/id_rsa"
-SSHUSER="user"
+SSHKEY=`jq -r '.SSH_KEY' config.json`
+SSHUSER=`jq -r '.SSH_USER' config.json`
 
 # Specify Server Role
 # controller or minion
